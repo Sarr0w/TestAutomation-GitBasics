@@ -1,0 +1,22 @@
+{
+  "name": "testautomation-gitbasics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sarr0w/TestAutomation-GitBasics.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sarr0w/TestAutomation-GitBasics/issues"
+  },
+  "homepage": "https://github.com/Sarr0w/TestAutomation-GitBasics#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^25.0.9"
+  }
+}
