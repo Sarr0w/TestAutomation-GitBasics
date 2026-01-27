@@ -15,11 +15,11 @@ test('invalidDateOfBirth', async ({ page }) => {
 
 
 await registerButton.click(); // 1853ms
-await emailFieldInput.fill('zhulien.zhelyazkov+123523@ventureslab.io');
+await emailFieldInput.fill('qweqweqwqweeqwe123523@venturesrab.io');
 await passwordFieldInput.fill('Password01!');
 await userNameFieldInput.fill('zhulien_sadqwe2');
 await firstNameFieldInput.fill('Zhulien');
-await lastNameFieldInput.fill('Zhelyazkov');
+await lastNameFieldInput.fill('Zhelyazkovoto');
 await dateOfBirthMonth.fill('01');
 await dateOfBirthDay.fill('01');
 await dateOfBirthYear.fill('1900');

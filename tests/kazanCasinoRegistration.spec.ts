@@ -25,7 +25,7 @@ test('registration in kazancasino', async ({ page }) => {
     const createAccountButton = iframe.getByTestId('registration-submit-button');
 
 await registerButton.click(); // 1853ms
-await emailFieldInput.fill('zhulien.zhelyazkov+123523@ventureslab.io');
+await emailFieldInput.fill('qweqweqwqweeqwe123523@venturesrab.io');
 await passwordFieldInput.fill('Password01!');
 await userNameFieldInput.fill('zhulien_sadqwe2');
 await firstNameFieldInput.fill('Zhulien');
