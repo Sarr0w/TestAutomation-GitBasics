@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 test('invalidDateOfBirth', async ({ page }) => {
-  await page.goto('https://kazancasino-stage.fsclub.tech/');  // 6018ms
+  await page.goto('https://kazancasino-stage.fsclub.tech/');  
 
     const registerButton = page.locator('.register-button-holder #buttonHeaderRegister');
     const iframe = page.frameLocator('iframe#newRegistrationIframe');
@@ -14,7 +14,7 @@ test('invalidDateOfBirth', async ({ page }) => {
     const dateOfBirthYear = iframe.getByTestId('dateOfBirth-YYYY');
 
 
-await registerButton.click(); // 1853ms
+await registerButton.click(); 
 await emailFieldInput.fill('qweqweqwqweeqwe123523@venturesrab.io');
 await passwordFieldInput.fill('Password01!');
 await userNameFieldInput.fill('zhulien_sadqwe2');
