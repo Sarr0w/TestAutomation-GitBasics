@@ -1,51 +1,47 @@
 import { test, expect } from '@playwright/test';
+import { LandingPage } from '../pages/LandingPage';
+import { LoginModal } from '../pages/components/loginModal';
+import { HomePage } from '../pages/homePage';
 
 
-const validUser ={
-    username: 'zhulien_try', 
+const VALID_USER = {
+    username: 'zhulien_try',
     password: 'Password01'
 };
 
-test.describe('Login - Smoke Tests @smoke @login', () => {
+test.describe('Login - Smoke Tests (POM) @smoke @login', () => {
+    let landingPage: LandingPage;
+    let loginModal: LoginModal;
+    let homePage: HomePage;
 
     test.beforeEach(async ({ page }) => {
-        await page.goto('https://kazancasino-stage.fsclub.tech/');
-        
-        
-        const loginButton = page.locator('.user-login-button #buttonHeaderLogin');
-        await loginButton.click();
+
+        landingPage = new LandingPage(page);
+        loginModal = new LoginModal(page);
+        homePage = new HomePage(page);
+
+  
+        await landingPage.navigate(); 
+        await landingPage.openLoginModal();
     });
 
-    // --- ТЕСТ 1: Успешен вход  ---
-    test('Successful login with valid credentials', async ({ page }) => {
+    // --- ТЕСТ 1: Проверка на UI елементите (Твоят оригинален Тест 2) ---
+    test('Verify login form UI elements are visible', async () => {
      
-        const iframe = page.frameLocator('#newLoginIframe');
+        await expect(loginModal.usernameInput, 'Username field is missing').toBeVisible();
+        await expect(loginModal.passwordInput, 'Password field is missing').toBeVisible();
+        await expect(loginModal.submitButton, 'Submit button is missing').toBeVisible();
+    });
 
-        const usernameField = iframe.getByTestId('userName');
-        const passwordField = iframe.getByTestId('password');
-        const submitButton = iframe.getByTestId('login-submit-button');
+    // --- ТЕСТ 2: Успешен вход и изход (Твоят оригинален Тест 1 + Logout) ---
+    test('Successful login and logout', async () => {
+   
+        await loginModal.login(VALID_USER.username, VALID_USER.password);
 
      
-        await usernameField.fill(validUser.username);
-        await passwordField.fill(validUser.password);
-
-       
-        await submitButton.click();
-
-    
-        const loggedUserIcon = page.getByTestId('loggedUserName'); //
+        await homePage.verifyUserIsLoggedIn();
         
-        await expect(loggedUserIcon, 'User should be logged in successfully').toBeVisible({ timeout: 15000 });
+ 
+        await homePage.logout();
     });
-
-    // --- ТЕСТ 2: Проверка на UI елементи (Вторият задължителен Smoke тест) ---
-    test('Verify login form UI elements are visible', async ({ page }) => {
-        const iframe = page.frameLocator('#newLoginIframe');
-
-        
-        await expect(iframe.getByTestId('userName'), 'Username field is missing').toBeVisible();
-        await expect(iframe.getByTestId('password'), 'Password field is missing').toBeVisible();
-        await expect(iframe.getByTestId('login-submit-button'), 'Submit button is missing').toBeVisible();
-    });
-
 });
