@@ -43,6 +43,14 @@ export default defineConfig({
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
     },
+    {
+      name: 'smoke',
+      grep: /@smoke/,
+    },
+    {
+      name: 'regression',
+      grep: /@smoke|@regression/, 
+    },
 
     // {
     //   name: 'webkit',
