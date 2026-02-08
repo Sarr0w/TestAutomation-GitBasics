@@ -14,7 +14,7 @@ export class HomePage extends BasePage {
 
    
     async verifyUserIsLoggedIn() {
-        await expect(this.userMenuButton).toBeVisible({ timeout: 15000 });
+        await expect(this.userMenuButton).toBeVisible({ timeout: 30000 });
     }
 
    

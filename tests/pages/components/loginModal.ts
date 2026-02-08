@@ -25,5 +25,7 @@ export class LoginModal extends BasePage {
         await this.usernameInput.fill(username);
         await this.passwordInput.fill(pass);
         await this.submitButton.click();
+
+        await this.submitButton.waitFor({ state: 'detached', timeout: 15000 });
     }
 }
