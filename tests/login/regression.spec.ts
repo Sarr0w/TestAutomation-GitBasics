@@ -39,23 +39,23 @@ test.describe('Login - Regression Tests (POM) @regression @login', () => {
         await expect(loginModal.errorAlert).toBeVisible();
     });
 
-    // --- ТЕСТ 3: Празно поле Username ---
-    test('Should validate empty username field', async () => {
-        // Попълваме само парола
-        await loginModal.passwordInput.fill(VALID_USER.password);
-        await loginModal.submitButton.click();
-
-        await expect(loginModal.usernameError).toBeVisible();
+  test('Login button should be DISABLED when username is empty', async () => {
+      
+        await loginModal.passwordInput.fill('SomePassword123');
+        
+        await loginModal.usernameInput.fill('');
+    
+        await expect(loginModal.submitButton).toBeDisabled();
     });
 
-    // --- ТЕСТ 4: Празно поле Password ---
-    test('Should validate empty password field', async () => {
+    // --- ТЕСТ 3: Празно Password (Нова логика) ---
+    test('Login button should be DISABLED when password is empty', async () => {
+
+        await loginModal.usernameInput.fill('SomeUser');
+        
+        await loginModal.passwordInput.fill('');
    
-        await loginModal.usernameInput.fill(VALID_USER.username);
-        await loginModal.submitButton.click();
-
-
-        await expect(loginModal.passwordError).toBeVisible();
+        await expect(loginModal.submitButton).toBeDisabled();
     });
 
     // --- ТЕСТ 5: Login with special characters ---

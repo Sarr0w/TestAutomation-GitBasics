@@ -7,7 +7,7 @@ export class SideMenu extends BasePage {
         super(page);
     }
 
-    // Основни категории
+   
     readonly casinoLink: Locator = this.page.locator('#navCasino');
     readonly liveCasinoLink: Locator = this.page.locator('#navLiveCasino');
     readonly sportsLink: Locator = this.page.locator('#navSports');
@@ -28,7 +28,7 @@ export class SideMenu extends BasePage {
    
     readonly liveChatButton: Locator = this.page.locator('#navLiveChat');
 
-// --- МЕТОДИ ЗА НАВИГАЦИЯ (ACTIONS) ---
+
     
     async openCasino() {
         await this.casinoLink.click();

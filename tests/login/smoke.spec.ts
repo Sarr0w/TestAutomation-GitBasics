@@ -33,15 +33,20 @@ test.describe('Login - Smoke Tests (POM) @smoke @login', () => {
         await expect(loginModal.submitButton, 'Submit button is missing').toBeVisible();
     });
 
-    // --- ТЕСТ 2: Успешен вход и изход (Твоят оригинален Тест 1 + Logout) ---
-    test('Successful login and logout', async () => {
-   
-        await loginModal.login(VALID_USER.username, VALID_USER.password);
+test('Successful login and logout', async ({ page }) => {
+    // 1. Login Action
+    await loginModal.login(VALID_USER.username, VALID_USER.password);
 
-     
-        await homePage.verifyUserIsLoggedIn();
-        
- 
-        await homePage.logout();
-    });
+    // 2. ASSERTION: Тук проверяваме дали сме логнати
+    // Вместо homePage.verifyUserIsLoggedIn(), пишем директно:
+    await expect(homePage.userMenuButton).toBeVisible({ timeout: 30000 });
+    
+    // 3. Logout Action
+    await homePage.logout();
+
+    // 4. ASSERTION: Тук проверяваме дали сме излезли
+    // Проверяваме дали бутонът за вход отново е видим
+    // (За целта добавихме loginHeaderButton в HomePage.ts или ползваме LandingPage)
+    await expect(landingPage.loginHeaderButton).toBeVisible(); 
+});
 });

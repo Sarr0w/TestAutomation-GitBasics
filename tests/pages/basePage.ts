@@ -9,8 +9,4 @@ export class BasePage {
         await this.page.goto(`https://kazancasino-stage.fsclub.tech${path}`);
     }
 
-
-    async waitForUrlToLoad(urlPart: string) {
-        await this.page.waitForURL(`**/*${urlPart}*`);
-    }
 }
