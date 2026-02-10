@@ -3,13 +3,12 @@ import { LandingPage } from '../pages/LandingPage';
 import { LoginModal } from '../pages/components/loginModal';
 import { HomePage } from '../pages/homePage';
 
-
 const VALID_USER = {
     username: 'zhulien_try',
     password: 'Password01!'
 };
 
-test.describe('Login - Regression Tests (POM) @regression @login', () => {
+test.describe('Login - Regression Tests', () => {
     let landingPage: LandingPage;
     let loginModal: LoginModal;
     let homePage: HomePage;
@@ -19,7 +18,6 @@ test.describe('Login - Regression Tests (POM) @regression @login', () => {
         loginModal = new LoginModal(page);
         homePage = new HomePage(page);
 
-        
         await landingPage.navigate();
         await landingPage.openLoginModal();
     });
@@ -28,7 +26,7 @@ test.describe('Login - Regression Tests (POM) @regression @login', () => {
     test('Should show error for invalid password', async () => {
         await loginModal.login(VALID_USER.username, 'WrongPass123!');
         
-        await expect(loginModal.errorAlert).toBeVisible();
+        await expect(loginModal.errorAlert, 'Error alert should be visible when password is incorrect').toBeVisible();
     });
 
     // --- ТЕСТ 2: Несъществуващ потребител ---
@@ -36,36 +34,32 @@ test.describe('Login - Regression Tests (POM) @regression @login', () => {
         const randomUser = `non_exist_${Date.now()}`;
         
         await loginModal.login(randomUser, 'Password01!');
-        await expect(loginModal.errorAlert).toBeVisible();
+        await expect(loginModal.errorAlert, 'Error alert should be visible for non-existent user').toBeVisible();
     });
 
-    // --- ТЕСТ 3: Празно поле Username ---
-    test('Should validate empty username field', async () => {
-        // Попълваме само парола
-        await loginModal.passwordInput.fill(VALID_USER.password);
-        await loginModal.submitButton.click();
-
-        await expect(loginModal.usernameError).toBeVisible();
+    // --- ТЕСТ 3: Празен Username ---
+    test('Login button should be DISABLED when username is empty', async () => {
+        await loginModal.passwordInput.fill('SomePassword123');
+    
+    
+        await expect(loginModal.submitButton, 'Login button should be disabled when username is empty').toBeDisabled();
     });
 
-    // --- ТЕСТ 4: Празно поле Password ---
-    test('Should validate empty password field', async () => {
+    // --- ТЕСТ 4: Празна Password ---
+    test('Login button should be DISABLED when password is empty', async () => {
+        await loginModal.usernameInput.fill('SomeUser');
+       
    
-        await loginModal.usernameInput.fill(VALID_USER.username);
-        await loginModal.submitButton.click();
-
-
-        await expect(loginModal.passwordError).toBeVisible();
+        await expect(loginModal.submitButton, 'Login button should be disabled when password is empty').toBeDisabled();
     });
 
-    // --- ТЕСТ 5: Login with special characters ---
+
     test('Should fail login with special characters', async () => {
         const sqlInjection = "' OR 1=1 --";
         
-       
         await loginModal.login(sqlInjection, sqlInjection);
      
-        await expect(loginModal.errorAlert).toBeVisible();
-        await expect(homePage.userMenuButton).not.toBeVisible();
+        await expect(loginModal.errorAlert, 'Error alert should be visible for SQL injection attempt').toBeVisible();
+        await expect(homePage.userMenuButton, 'User should NOT be logged in with SQL injection credentials').not.toBeVisible();
     });
 });
