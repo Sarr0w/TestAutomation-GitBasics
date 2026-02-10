@@ -18,14 +18,12 @@ test.describe('Register - Smoke Tests (POM) @smoke @register', () => {
     });
 
     test('Successful registration with auto-generated data', async () => {
-       
         const userData = registerModal.generateRandomUserData();
 
-        
         await registerModal.fillForm(userData);
         await registerModal.submit();
         await registerModal.closeSuccessModal();
 
-        await expect(homePage.userMenuButton).toBeVisible();
+        await expect(homePage.userMenuButton, 'User Menu button should be visible after successful registration').toBeVisible();
     });
 });
