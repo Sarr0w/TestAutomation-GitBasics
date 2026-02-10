@@ -9,52 +9,56 @@ test.describe('Footer Navigation Tests', () => {
     test.beforeEach(async ({ page }) => {
         landingPage = new LandingPage(page);
         footer = new Footer(page);
+        
         await landingPage.navigate();
     });
 
-    test('Should verify important footer links work', async ({ page }) => {
-        // 1. Тестваме Terms & Conditions
+   // --- ТЕСТ 1: Terms & Conditions ---
+    test('Should navigate to Terms & Conditions', async ({ page }) => {
         await footer.openTermsAndConditions();
-        await expect(page).toHaveURL(/.*terms-conditions/); // Проверяваме част от URL-а
+        await expect(page).toHaveURL(/.*terms-conditions/);
+    });
 
-        // Връщаме се назад за следващия тест
-        await landingPage.navigate();
-
-        // 2. Тестваме About Us
+    // --- ТЕСТ 2: About Us ---
+    test('Should navigate to About Us', async ({ page }) => {
         await footer.openAboutUs();
         await expect(page).toHaveURL(/.*about-us/);
+    });
 
-        await landingPage.navigate();
-
-        // 4. Тестваме Security & Privacy
+    // --- ТЕСТ 3: Security & Privacy ---
+    test('Should navigate to Security & Privacy', async ({ page }) => {
         await footer.openSecurityAndPrivacy();
-        await expect(page).toHaveURL(/.*security-privacy/); 
+        await expect(page).toHaveURL(/.*security-privacy/);
+    });
 
-        await landingPage.navigate();
-
-        // 5. Тестваме Contact Us
+    // --- ТЕСТ 4: Contact Us ---
+    test('Should navigate to Contact Us', async ({ page }) => {
         await footer.openContactUs();
-        await expect(page).toHaveURL(/.*contact-us/); 
+        await expect(page).toHaveURL(/.*contact-us/);
+    });
 
-        await landingPage.navigate();
-
+    // --- ТЕСТ 5: Responsible Gaming ---
+    test('Should navigate to Responsible Gaming', async ({ page }) => {
         await footer.openResponsibleGaming();
-        await expect(page).toHaveURL(/.*responsible-gambling/);       
+        await expect(page).toHaveURL(/.*responsible-gambling/);
+    });
 
-        await landingPage.navigate();
-        
+    // --- ТЕСТ 6: Betting Rules ---
+    test('Should navigate to Betting Rules', async ({ page }) => {
         await footer.openBettingRules();
         await expect(page).toHaveURL(/.*betting-rules/);
+    });
 
-        await landingPage.navigate();
-
+    // --- ТЕСТ 7: Payment Methods ---
+    test('Should navigate to Payment Methods', async ({ page }) => {
         await footer.openPaymentMethods();
-        await expect(page).toHaveURL(/.*payment-methods/);  
+        await expect(page).toHaveURL(/.*payment-methods/);
+    });
 
-        await landingPage.navigate();
-
+    // --- ТЕСТ 8: FAQ ---
+    test('Should navigate to FAQ', async ({ page }) => {
         await footer.openFAQ();
-        await expect(page).toHaveURL(/.*faq/);  
+        await expect(page).toHaveURL(/.*faq/);
     });
 
 });

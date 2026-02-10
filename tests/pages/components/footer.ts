@@ -7,7 +7,7 @@ export class Footer extends BasePage {
         super(page);
     }
 
-    // Използваме по-гъвкави селектори за линкове, съдържащи текст или href
+
     readonly aboutUsLink: Locator = this.page.locator('#footerLinkAboutUs');
     readonly termsLink: Locator = this.page.locator('#footerLinkTermsAndConditions');
     readonly responsibleGamingLink: Locator = this.page.locator('#footerLinkResponsibleGambling');
@@ -17,14 +17,14 @@ export class Footer extends BasePage {
     readonly paymentMethodsLink: Locator = this.page.locator('#footerLinkPaymentMethods');
     readonly helpCenterLink: Locator = this.page.locator('#footerLinkPlatformHelp');
     readonly securityPrivacyLink: Locator = this.page.locator('#footerLinkSecurityAndPrivacy');
-    // Методи
+  
     async openAboutUs() {
-        // Често футърът не се вижда, докато не скролнеш
+        
         await this.aboutUsLink.scrollIntoViewIfNeeded();
         await this.aboutUsLink.click();
     }
     async openTermsAndConditions() {
-        // Често футърът не се вижда, докато не скролнеш
+   
         await this.termsLink.scrollIntoViewIfNeeded();
         await this.termsLink.click();
     }

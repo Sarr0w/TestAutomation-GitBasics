@@ -1,7 +1,6 @@
 import { FrameLocator, Locator, Page } from '@playwright/test';
 import { BasePage } from '../BasePage';
 
-// 1. Дефинираме типа на данните, за да ни помага VS Code
 export interface UserData {
     email?: string;
     password?: string;
@@ -25,11 +24,11 @@ export class RegisterModal extends BasePage {
 
     readonly iframe: FrameLocator = this.page.frameLocator('iframe#newRegistrationIframe');
     
-    // --- LOCATORS ---
+   
     readonly successButton: Locator = this.iframe.getByTestId('play-button');
     readonly submitButton: Locator = this.iframe.getByTestId('registration-submit-button');
 
-    // Inputs
+  
     readonly emailInput: Locator = this.iframe.getByTestId('email');
     readonly passwordInput: Locator = this.iframe.getByTestId('password');
     readonly usernameInput: Locator = this.iframe.getByTestId('userName');
@@ -43,12 +42,12 @@ export class RegisterModal extends BasePage {
     readonly cityInput: Locator = this.iframe.getByTestId('city');
     readonly zipInput: Locator = this.iframe.getByTestId('zipCode');
 
-    // Checkboxes
+
     readonly termsCheckbox: Locator = this.iframe.getByTestId('acceptTermsAndConditions');
     readonly ageCheckbox: Locator = this.iframe.getByTestId('acceptAttestation');
     readonly promoCheckbox: Locator = this.iframe.getByTestId('notifyForPromotionsAndBonuses');
 
-    // Errors
+
     readonly emailError: Locator = this.iframe.getByTestId('input-email-error');
     readonly passwordError: Locator = this.iframe.getByTestId('input-password-error');
     readonly usernameError: Locator = this.iframe.getByTestId('input-userName-error');
@@ -56,7 +55,6 @@ export class RegisterModal extends BasePage {
     readonly cityError: Locator = this.iframe.getByTestId('input-city-error');
 
 
-    // --- DATA GENERATION ---
     
     private generateIdSuffix(): string {
         const ts = Date.now().toString(36);
@@ -70,7 +68,7 @@ export class RegisterModal extends BasePage {
         return padded.charAt(0).toUpperCase() + padded.slice(1);
     }
 
-    // Публичен метод за генериране на валиден потребител
+  
     generateRandomUserData(): UserData {
         const suffix = this.generateIdSuffix();
         return {
@@ -89,9 +87,6 @@ export class RegisterModal extends BasePage {
         };
     }
 
-    // --- ACTIONS ---
-
-    // 2. Partial<UserData> позволява да подадем само част от полетата (напр. само email)
     async fillForm(userData: Partial<UserData>) {
         if (userData.email) await this.emailInput.fill(userData.email);
         if (userData.password) await this.passwordInput.fill(userData.password);
@@ -109,7 +104,7 @@ export class RegisterModal extends BasePage {
         if (userData.city) await this.cityInput.fill(userData.city);
         if (userData.zip) await this.zipInput.fill(userData.zip);
 
-        // Чекбоксовете ги маркираме винаги, за да можем да стигнем до Submit бутона
+       
         await this.termsCheckbox.check();
         await this.ageCheckbox.check();
         await this.promoCheckbox.check();

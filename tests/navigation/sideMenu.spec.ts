@@ -24,8 +24,8 @@ test.describe('Side Menu Navigation & Game Access Tests', () => {
         await landingPage.navigate();
     });
 
-    // --- ГРУПА 1: Публични страници ---
-    test('Should navigate to public pages correctly', async ({ page }) => {
+    // --- Тест 1 Навигация в основните страници ---
+    test('Should navigate to main pages correctly', async ({ page }) => {
         await sideMenu.openCasino();
         await expect(page).toHaveURL(/.*casino/i);
 
@@ -36,43 +36,39 @@ test.describe('Side Menu Navigation & Game Access Tests', () => {
         await expect(page).toHaveURL(/.*promotions/i);
     });
 
-    // --- ГРУПА 2: Live Chat ---
+    // --- Тест 2 Навигация до Live Chat ---
     test('Should be able to click Live Chat button', async () => {
         await sideMenu.openLiveChat();
     });
 
-    // --- ГРУПА 3: Гости (Login Modal) ---
-    test('Guest User: Should trigger Login Modal for restricted games', async () => {
-        // Zeppelin
+    // --- Тест 3 Отваряне на login формата при стартиране на Zepplin и Aviator при не логнат юзър---
+    test('Should trigger Login Modal for Zepplin and Aviator', async () => {
+     
         await sideMenu.openZeppelin();
         await expect(loginModal.usernameInput).toBeVisible({ timeout: 5000 });
         
         await landingPage.navigate();
 
-        // Aviator
+        
         await sideMenu.openAviator();
         await expect(loginModal.usernameInput).toBeVisible({ timeout: 5000 });
     });
 
-// --- ГРУПА 4: Логнати (ФИНАЛНА ПОПРАВКА) ---
-    
-    // ТЕСТ 4.1: ZEPPELIN
+// ---Тест 4 Зареждане на играта Zeppelin за логнат потребител---
+
     test('Logged User: Should load Zeppelin game', async ({ page }) => {
         test.setTimeout(90000); 
 
-        // 1. Вход
+      
         await landingPage.openLoginModal();
         await loginModal.login(VALID_USER.username, VALID_USER.password);
         await expect(homePage.userMenuButton).toBeVisible({ timeout: 30000 });
 
-        // 2. Отваряме Zeppelin
-        console.log('Testing Zeppelin load...');
         await sideMenu.openZeppelin();
         
-       
         const gameIframe = page.locator('iframe[id^="game-play-frame"].normalscreen').last();
         
-        // Проверка 1: Iframe-ът трябва да е видим на екрана
+      
         await expect(gameIframe).toBeVisible({ timeout: 30000 });
         await expect(gameIframe).toHaveAttribute('src', /.+/); 
 
