@@ -28,7 +28,7 @@ test.describe('Register - Regression Tests (POM) @regression @register', () => {
         await registerModal.dobMonthInput.fill('01');
         await registerModal.dobYearInput.fill('1900');
         
-        await registerModal.emailInput.click(); // Blur trigger
+        await registerModal.emailInput.click(); 
 
         await expect(registerModal.dobError, 'Date of Birth error should be visible for year 1900').toBeVisible();
     });
@@ -36,7 +36,8 @@ test.describe('Register - Regression Tests (POM) @regression @register', () => {
     // --- ТЕСТ 3: Твърде къса парола ---
     test('Should show error for short password', async () => {
         await registerModal.passwordInput.fill('123');
-        await registerModal.emailInput.click(); // Blur trigger
+        await registerModal.emailInput.click();
+
 
         await expect(registerModal.passwordError, 'Password error should be visible when password is too short').toBeVisible();
     });

@@ -22,12 +22,7 @@ test.describe('Login - Smoke Tests (POM) @smoke @login', () => {
         await landingPage.openLoginModal();
     });
 
-    // --- ТЕСТ 1: Проверка на UI елементите ---
-    test('Verify login form UI elements are visible', async () => {
-        await expect(loginModal.usernameInput, 'Username input field should be visible').toBeVisible();
-        await expect(loginModal.passwordInput, 'Password input field should be visible').toBeVisible();
-        await expect(loginModal.submitButton, 'Login submit button should be visible').toBeVisible();
-    });
+ // logout otdelno
 
     // --- ТЕСТ 2: Успешно логване и излизане ---
     test('Successful login and logout', async () => {

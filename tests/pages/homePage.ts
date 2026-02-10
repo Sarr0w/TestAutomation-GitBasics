@@ -7,7 +7,6 @@ export class HomePage extends BasePage {
         super(page);
     }
 
-  
     readonly userMenuButton: Locator = this.page.getByTestId('loggedUserName');
     readonly homePageButton: Locator = this.page.getByTestId('home-button');
     readonly logoutButton: Locator = this.page.getByTestId('logout');

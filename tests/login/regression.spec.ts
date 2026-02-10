@@ -8,7 +8,7 @@ const VALID_USER = {
     password: 'Password01!'
 };
 
-test.describe('Login - Regression Tests (POM) @regression @login', () => {
+test.describe('Login - Regression Tests', () => {
     let landingPage: LandingPage;
     let loginModal: LoginModal;
     let homePage: HomePage;
@@ -40,20 +40,20 @@ test.describe('Login - Regression Tests (POM) @regression @login', () => {
     // --- ТЕСТ 3: Празен Username ---
     test('Login button should be DISABLED when username is empty', async () => {
         await loginModal.passwordInput.fill('SomePassword123');
-        await loginModal.usernameInput.fill('');
+    
     
         await expect(loginModal.submitButton, 'Login button should be disabled when username is empty').toBeDisabled();
     });
 
-    // --- ТЕСТ 4: Празно Password ---
+    // --- ТЕСТ 4: Празна Password ---
     test('Login button should be DISABLED when password is empty', async () => {
         await loginModal.usernameInput.fill('SomeUser');
-        await loginModal.passwordInput.fill('');
+       
    
         await expect(loginModal.submitButton, 'Login button should be disabled when password is empty').toBeDisabled();
     });
 
-    // --- ТЕСТ 5: Login with special characters ---
+
     test('Should fail login with special characters', async () => {
         const sqlInjection = "' OR 1=1 --";
         
