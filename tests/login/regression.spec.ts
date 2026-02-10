@@ -62,7 +62,6 @@ test.describe('Login - Regression Tests (POM) @regression @login', () => {
     test('Should fail login with special characters', async () => {
         const sqlInjection = "' OR 1=1 --";
         
-       
         await loginModal.login(sqlInjection, sqlInjection);
      
         await expect(loginModal.errorAlert).toBeVisible();

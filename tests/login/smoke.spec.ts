@@ -40,7 +40,7 @@ test('Successful login and logout', async ({ page }) => {
    
     await loginModal.login(VALID_USER.username, VALID_USER.password);
 
-    await expect(homePage.userMenuButton).toBeVisible({ timeout: 30000 });
+    await expect(homePage.userMenuButton).toBeVisible();
     
     await homePage.logout();
 

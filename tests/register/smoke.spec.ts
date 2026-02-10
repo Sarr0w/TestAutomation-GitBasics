@@ -26,6 +26,6 @@ test.describe('Register - Smoke Tests (POM) @smoke @register', () => {
         await registerModal.submit();
         await registerModal.closeSuccessModal();
 
-        await expect(homePage.userMenuButton).toBeVisible({ timeout: 30000 });
+        await expect(homePage.userMenuButton).toBeVisible();
     });
 });

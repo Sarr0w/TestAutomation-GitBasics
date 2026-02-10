@@ -71,6 +71,6 @@ test.describe('Register - Regression Tests (POM) @regression @register', () => {
         await registerModal.submit();
 
        
-        await expect(registerModal.usernameError).toBeVisible({ timeout: 10000 });
+        await expect(registerModal.usernameError).toBeVisible();
     });
-});
+    });

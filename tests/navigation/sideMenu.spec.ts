@@ -45,13 +45,13 @@ test.describe('Side Menu Navigation & Game Access Tests', () => {
     test('Should trigger Login Modal for Zepplin and Aviator', async () => {
      
         await sideMenu.openZeppelin();
-        await expect(loginModal.usernameInput).toBeVisible({ timeout: 5000 });
+        await expect(loginModal.usernameInput).toBeVisible();
         
         await landingPage.navigate();
 
         
         await sideMenu.openAviator();
-        await expect(loginModal.usernameInput).toBeVisible({ timeout: 5000 });
+        await expect(loginModal.usernameInput).toBeVisible();
     });
 
 // ---Тест 4 Зареждане на играта Zeppelin за логнат потребител---
@@ -62,14 +62,14 @@ test.describe('Side Menu Navigation & Game Access Tests', () => {
       
         await landingPage.openLoginModal();
         await loginModal.login(VALID_USER.username, VALID_USER.password);
-        await expect(homePage.userMenuButton).toBeVisible({ timeout: 30000 });
+        await expect(homePage.userMenuButton).toBeVisible();
 
         await sideMenu.openZeppelin();
         
         const gameIframe = page.locator('iframe[id^="game-play-frame"].normalscreen').last();
         
       
-        await expect(gameIframe).toBeVisible({ timeout: 30000 });
+        await expect(gameIframe).toBeVisible();
         await expect(gameIframe).toHaveAttribute('src', /.+/); 
 
 });
